@@ -6,6 +6,7 @@ library three_commas;
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
+import 'package:three_commas/model/deal.dart';
 
 class ThreeCommasException implements Exception {
   final String message;
@@ -76,14 +77,16 @@ class ThreeCommasApi {
     return await makeRequest('GET', '/public/api/ver1/ping', null);
   }
 
-  Future<dynamic> getDeals(
+  Future<List<Deal>> getDeals(
     Map<String, dynamic>? params,
-  ) async =>
-      await makeRequest(
-        'GET',
-        '/public/api/ver1/deals?',
-        params,
-      );
+  ) async {
+    final req = await makeRequest(
+      'GET',
+      '/public/api/ver1/deals?',
+      params,
+    );
+    return req.map<Deal>((deal) => Deal.fromJson(deal)).toList();
+  }
 
   Future<dynamic> dealUpdateMaxSafetyOrders(
     int dealId,

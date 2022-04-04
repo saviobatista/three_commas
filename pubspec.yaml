@@ -1,6 +1,6 @@
 name: three_commas
 description: 3Commas API wrapper in Dart
-version: 0.1.0
+version: 0.2.1
 homepage: https://github.com/saviobatista/three_commas_api
 
 environment:
